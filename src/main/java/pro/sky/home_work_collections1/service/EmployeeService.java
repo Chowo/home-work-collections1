@@ -31,7 +31,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         return newEmployee;
     }
 
-    public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException{
+    public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
         Employee deletableEmployee = new Employee(firstName, lastName);
         if (!employees.contains(deletableEmployee)) {
             throw new EmployeeNotFoundException();
