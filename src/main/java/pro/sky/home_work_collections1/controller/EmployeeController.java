@@ -1,11 +1,12 @@
 package pro.sky.home_work_collections1.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.home_work_collections1.model.Employee;
-import pro.sky.home_work_collections1.service.*;
+import pro.sky.home_work_collections1.service.EmployeeAlreadyAddedException;
+import pro.sky.home_work_collections1.service.EmployeeNotFoundException;
+import pro.sky.home_work_collections1.service.EmployeeServiceInterface;
+import pro.sky.home_work_collections1.service.EmployeeStorageIsFullException;
 
 import java.util.List;
 
@@ -26,37 +27,19 @@ public class EmployeeController {
     @GetMapping("/add")
     public Employee add(@RequestParam("firstName") String firstName,
                         @RequestParam("lastName") String lastName) {
-        Employee employee = null;
-        try {
-            employee = employeeService.addNewEmployee(firstName, lastName);
-        } catch (EmployeeAlreadyAddedException e) {
-            System.out.println(e.getMessage());
-        } catch (EmployeeStorageIsFullException e) {
-            System.out.println(e.getMessage());
-        }
-        return employee;
+        return employeeService.addNewEmployee(firstName, lastName);
     }
+
     @GetMapping("/remove")
     public Employee remove(@RequestParam("firstName") String firstName,
-                        @RequestParam("lastName") String lastName) {
-        Employee employee = null;
-        try {
-            employee = employeeService.deleteEmployee(firstName, lastName);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        return employee;
+                           @RequestParam("lastName") String lastName) {
+        return employeeService.deleteEmployee(firstName, lastName);
     }
+
     @GetMapping("/find")
     public Employee find(@RequestParam("firstName") String firstName,
-                        @RequestParam("lastName") String lastName) {
-        Employee employee = null;
-        try {
-            employee = employeeService.findEmployee(firstName, lastName);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        return employee;
+                         @RequestParam("lastName") String lastName) {
+        return employeeService.findEmployee(firstName, lastName);
     }
 
 

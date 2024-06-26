@@ -7,6 +7,7 @@ import java.util.List;
 public interface EmployeeServiceInterface {
 
     public List<Employee> getEmployees();
+
     public Employee addNewEmployee(String firstName, String lastName);
 
     public Employee deleteEmployee(String firstName, String lastName);
