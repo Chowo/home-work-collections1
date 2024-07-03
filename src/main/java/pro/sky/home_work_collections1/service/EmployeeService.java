@@ -4,18 +4,20 @@ import org.springframework.stereotype.Service;
 import pro.sky.home_work_collections1.model.Employee;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
-    private List<Employee> employees;
+    private Map<String, Employee> employees;
     private static final int EMPLOYEE_LIMIT = 5;
 
     public EmployeeService() {
-        this.employees = new ArrayList<>();
+        this.employees = new HashMap<>();
     }
 
-    public List<Employee> getEmployees() {
+    public Map<String, Employee> getEmployees() {
         return employees;
     }
 
@@ -24,25 +26,27 @@ public class EmployeeService implements EmployeeServiceInterface {
             throw new EmployeeStorageIsFullException();
         }
         Employee newEmployee = new Employee(firstName, lastName);
-        if (employees.contains(newEmployee)) {
+        if (employees.containsValue(newEmployee)) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.add(newEmployee);
+        String key = firstName + " " + lastName;
+        employees.put(key, newEmployee);
         return newEmployee;
     }
 
-    public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException{
+    public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
         Employee deletableEmployee = new Employee(firstName, lastName);
-        if (!employees.contains(deletableEmployee)) {
+        if (!employees.containsValue(deletableEmployee)) {
             throw new EmployeeNotFoundException();
         }
-        employees.remove(deletableEmployee);
+        String key = firstName + " " + lastName;
+        employees.remove(key);
         return deletableEmployee;
     }
 
     public Employee findEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
         Employee goalEmployee = new Employee(firstName, lastName);
-        if (employees.contains(goalEmployee)) {
+        if (employees.containsValue(goalEmployee)) {
             return goalEmployee;
         } else throw new EmployeeNotFoundException();
     }
