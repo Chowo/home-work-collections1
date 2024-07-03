@@ -8,6 +8,7 @@ import pro.sky.home_work_collections1.model.Employee;
 import pro.sky.home_work_collections1.service.EmployeeServiceInterface;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,7 +20,7 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> printAllEmployees() {
+    public Map<String, Employee> printAllEmployees() {
         return employeeService.getEmployees();
     }
 
