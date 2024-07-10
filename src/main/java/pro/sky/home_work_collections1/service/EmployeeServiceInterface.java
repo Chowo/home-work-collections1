@@ -9,7 +9,7 @@ public interface EmployeeServiceInterface {
 
     public Map<String, Employee> getEmployees();
 
-    public Employee addNewEmployee(String firstName, String lastName);
+    public Employee addNewEmployee(String firstName, String lastName, int department, double salary);
 
     public Employee deleteEmployee(String firstName, String lastName);
 

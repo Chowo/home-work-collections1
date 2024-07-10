@@ -21,11 +21,11 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employees;
     }
 
-    public Employee addNewEmployee(String firstName, String lastName) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
+    public Employee addNewEmployee(String firstName, String lastName, int department, double salary) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
         if (employees.size() >= EMPLOYEE_LIMIT) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee newEmployee = new Employee(firstName, lastName);
+        Employee newEmployee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(newEmployee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -47,4 +47,6 @@ public class EmployeeService implements EmployeeServiceInterface {
             return goalEmployee;
         } else throw new EmployeeNotFoundException();
     }
+
+
 }

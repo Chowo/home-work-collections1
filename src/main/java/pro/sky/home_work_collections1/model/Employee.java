@@ -5,10 +5,18 @@ import java.util.Objects;
 public class Employee {
     private String firstName;
     private String lastName;
+    private int department;
+    private double salary;
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+    public Employee(String firstName, String lastName, int department, double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
     }
 
     public String getFirstName() {
@@ -23,6 +31,14 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
+    public int getDepartment() {
+        return department;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -32,15 +48,19 @@ public class Employee {
         }
         Employee employee = (Employee) object;
         return getFirstName().equals(employee.getFirstName()) &&
-                getLastName().equals(employee.getLastName());
+                getLastName().equals(employee.getLastName()) &&
+                getDepartment() == employee.getDepartment() &&
+                getSalary() == employee.getSalary();
     }
 
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName());
+        return Objects.hash(getFirstName(), getLastName(), getDepartment(), getSalary());
     }
 
     public String toString() {
         return "Имя - " + getFirstName() +
-                "Фамилия - " + getLastName();
+                " Фамилия - " + getLastName() +
+                "Отдел №" + getDepartment() +
+                "зарплата - " + getSalary();
     }
 }
