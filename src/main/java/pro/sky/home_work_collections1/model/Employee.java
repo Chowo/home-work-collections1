@@ -3,8 +3,8 @@ package pro.sky.home_work_collections1.model;
 import java.util.Objects;
 
 public class Employee {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     private int department;
     private double salary;
 

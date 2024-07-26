@@ -1,11 +1,14 @@
 package pro.sky.home_work_collections1.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import pro.sky.home_work_collections1.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.home_work_collections1.exceptions.EmployeeNotFoundException;
+import pro.sky.home_work_collections1.exceptions.EmployeeStorageIsFullException;
+import pro.sky.home_work_collections1.exceptions.WrongInputException;
 import pro.sky.home_work_collections1.model.Employee;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -25,12 +28,20 @@ public class EmployeeService implements EmployeeServiceInterface {
         if (employees.size() >= EMPLOYEE_LIMIT) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee newEmployee = new Employee(firstName, lastName, department, salary);
+        Employee newEmployee = new Employee(StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department,
+                salary);
         if (employees.containsKey(newEmployee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.put(newEmployee.getFullName(), newEmployee);
-        return newEmployee;
+        String validChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+        if (StringUtils.containsOnly(firstName, validChars) && StringUtils.containsOnly(lastName, validChars)) {
+            employees.put(newEmployee.getFullName(), newEmployee);
+            return newEmployee;
+        } else {
+            throw new WrongInputException();
+        }
     }
 
     public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
