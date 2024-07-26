@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/department")
+@RequestMapping(value = "/department")
 public class EmployeeDepartmentController {
     public final EmployeeDepartmentService service;
 

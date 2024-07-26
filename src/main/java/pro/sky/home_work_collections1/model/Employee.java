@@ -1,5 +1,8 @@
 package pro.sky.home_work_collections1.model;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 import java.util.Objects;
 
 public class Employee {
@@ -9,12 +12,12 @@ public class Employee {
     private double salary;
 
     public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase(Locale.ROOT));
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase(Locale.ROOT));
     }
     public Employee(String firstName, String lastName, int department, double salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase(Locale.ROOT));
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase(Locale.ROOT));
         this.department = department;
         this.salary = salary;
     }

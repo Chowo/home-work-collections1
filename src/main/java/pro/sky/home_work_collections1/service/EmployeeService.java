@@ -25,26 +25,23 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     public Employee addNewEmployee(String firstName, String lastName, int department, double salary) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
+        validateInput(firstName, lastName);
         if (employees.size() >= EMPLOYEE_LIMIT) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee newEmployee = new Employee(StringUtils.capitalize(firstName),
-                StringUtils.capitalize(lastName),
+        Employee newEmployee = new Employee(firstName,
+                lastName,
                 department,
                 salary);
         if (employees.containsKey(newEmployee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
-        String validChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-        if (StringUtils.containsOnly(firstName, validChars) && StringUtils.containsOnly(lastName, validChars)) {
-            employees.put(newEmployee.getFullName(), newEmployee);
-            return newEmployee;
-        } else {
-            throw new WrongInputException();
-        }
+        employees.put(newEmployee.getFullName(), newEmployee);
+        return newEmployee;
     }
 
     public Employee deleteEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
+        validateInput(firstName, lastName);
         Employee deletableEmployee = new Employee(firstName, lastName);
         if (!employees.containsKey(deletableEmployee.getFullName())) {
             throw new EmployeeNotFoundException();
@@ -53,10 +50,17 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     public Employee findEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
+        validateInput(firstName, lastName);
         Employee goalEmployee = new Employee(firstName, lastName);
         if (employees.containsKey(goalEmployee.getFullName())) {
             return goalEmployee;
         } else throw new EmployeeNotFoundException();
+    }
+
+    private void validateInput(String firstName, String lastName) {
+        if (!(StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastName))) {
+            throw new WrongInputException();
+        }
     }
 
 

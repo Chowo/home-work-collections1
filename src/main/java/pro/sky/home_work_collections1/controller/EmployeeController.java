@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.home_work_collections1.model.Employee;
 import pro.sky.home_work_collections1.service.EmployeeServiceInterface;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee")
 public class EmployeeController {
-    private EmployeeServiceInterface employeeService;
+    private final EmployeeServiceInterface employeeService;
 
     public EmployeeController(EmployeeServiceInterface employeeService) {
         this.employeeService = employeeService;
