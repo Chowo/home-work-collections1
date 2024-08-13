@@ -5,17 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.home_work_collections1.model.Employee;
-import pro.sky.home_work_collections1.service.EmployeeServiceInterface;
+import pro.sky.home_work_collections1.service.EmployeeService;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private EmployeeServiceInterface employeeService;
+    private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeServiceInterface employeeService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 

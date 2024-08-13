@@ -12,6 +12,7 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
     public Employee(String firstName, String lastName, int department, double salary) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,9 +59,9 @@ public class Employee {
     }
 
     public String toString() {
-        return "Имя - " + getFirstName() +
-                " Фамилия - " + getLastName() +
-                "Отдел №" + getDepartment() +
+        return "Имя - " + getFirstName() + " " +
+                " Фамилия - " + getLastName() + " " +
+                "Отдел №" + getDepartment() + " " +
                 "зарплата - " + getSalary();
     }
 }
